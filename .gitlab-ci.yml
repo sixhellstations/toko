@@ -1,0 +1,46 @@
+image: node:lts-alpine
+
+stages:
+  - test
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+# Test
+lint:
+  stage: test
+  script:
+    - yarn
+    - yarn lint
+
+jest:
+  stage: test
+  script:
+    - yarn
+    - yarn test
+
+# Build
+build:
+  stage: build
+  script:
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+    - build
+    expire_in: 10 minutes
+
+# Deploy
+deploy:
+  stage: deploy
+  before_script:
+    - apk update
+    - apk add lftp
+  script:
+    - ls
+    - lftp -e "set ftp:ssl-allow no; ls; cd www; rm -rf $SERVER_FTP_WWWDIR; mirror -R build $SERVER_FTP_WWWDIR; bye" -u $SERVER_FTP_USER,$SERVER_FTP_PASSWORD $SERVER_FTP_HOST
+  only:
+    - master
