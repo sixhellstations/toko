@@ -21,7 +21,7 @@ export const setSearchValue = (value: string): AppActions => ({
 });
 
 export const filterPosts = (value: string) => async (dispatch: Dispatch<AppActions>) => {
-    dispatch(setFilteredPosts(store.getState().posts.filter((post) => post.title.includes(value))));
+    dispatch(setFilteredPosts(store.getState().posts.filter((post) => post.title.toLowerCase().includes(value.toLowerCase()))));
 };
 
 export const setSearchValueAndFilterPosts = (value: string) => async (dispatch: Dispatch<any>) => {
