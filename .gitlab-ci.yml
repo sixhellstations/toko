@@ -16,12 +16,6 @@ lint:
     - yarn
     - yarn lint
 
-jest:
-  stage: test
-  script:
-    - yarn
-    - yarn test
-
 # Build
 build:
   stage: build

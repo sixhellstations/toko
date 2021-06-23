@@ -8,10 +8,6 @@ We are here - http://toko.ff44bd.ru.
 
 Runs the app in the development mode at http://localhost:3000.
 
-### `yarn test`
-
-Launches the test runner.
-
 ### `yarn lint`
 
 Launches ESLint and automatically fix problems.
